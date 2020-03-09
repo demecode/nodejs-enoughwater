@@ -6,8 +6,6 @@ export const MSGS = {
     LEFT_UNIT_MSG: 'LEFT_UNIT_MSG',
     RIGHT_UNIT_MSG: 'RIGHT_UNIT_MSG',
     KG_TO_DRINKING_LITRES: 'KG_TO_DRINKING_LITRES',
-    // POUNDS_TO_DRINKING_LITRES: 'POUNDS_TO_DRINKING_LITRES',
-    // STONE_TO_DRINKING_LITRES: 'POUNDS_TO_DRINKING_LITRES',
 }
 
 export const leftInputMsg = (leftValue) => {
@@ -42,17 +40,17 @@ export const rightUnitMsg = (rightUnit) => {
 const toInt = R.pipe(parseInt, R.defaultTo(0));
 
 const update = (msg, model) => {
-    switch(msg.type) {
+    switch (msg.type) {
         case MSGS.LEFT_INPUT_MSG: {
             if (msg.leftValue === '')
-            return { ...model, sourceLeft: true, leftValue: '', rightValue: '' };
-            const leftValue = toInt(msg.leftValue)
+                return { ...model, sourceLeft: true, leftValue: '', rightValue: '' };
+            const leftValue = (msg.leftValue)
             return convert({ ...model, sourceLeft: true, leftValue });
         }
         case MSGS.RIGHT_INPUT_MSG: {
             if (msg.rightValue === '')
-            return { ...model, sourceLeft: false, leftValue: '', rightValue: '' };
-            const rightValue = toInt(msg.rightValue)
+                return { ...model, sourceLeft: false, leftValue: '', rightValue: '' };
+            const rightValue = (msg.rightValue)
             return convert({ ...model, sourceLeft: false, rightValue });
         }
         case MSGS.RIGHT_UNIT_MSG: {
@@ -74,9 +72,9 @@ const convert = (model) => {
     // use destruction arrays -
     // when the sourceLeft is true
     // we unpack the unit to the left unit, fromWeight to the left value and the right unit (which will be converted to) etc
-    // if false, we unpack the right unit and right temp etc
-    const [fromUnit, fromWeight, toUnit] = 
-    model.sourceLeft ? [leftUnit, leftValue, rightUnit] : [rightUnit, rightValue, leftUnit];
+    // if false, we unpack the right unit and right litre etc
+    const [fromUnit, fromWeight, toUnit] =
+        model.sourceLeft ? [leftUnit, leftValue, rightUnit] : [rightUnit, rightValue, leftUnit];
 
     const otherValue = R.pipe(
         // what should the litres read?
@@ -88,42 +86,48 @@ const convert = (model) => {
 }
 
 const round = (number) => {
-    return Math.round(number)
-  }
+    return number.toFixed(2);
+    // Math.round(number)
+}
 
-  const convertedFromToLitres = (fromUnit, toUnit, weight) => {
+const convertedFromToLitres = (fromUnit, toUnit, weight) => {
+    console.log(weight);
     // R.pathOr looks at the unitconversion object
-    // then attempst to return the nested valye in th obejct 
+    // then  to return the nested valye in th obejct 
     // using the values in the arrary
     //example its looking at unitconversions.<fromUnit>.<toUnit>
     // unitconversions.Fahrenheit.Celsius
     const convertFn = R.pathOr(
-      R.identity,
-      [fromUnit, toUnit],
-      UnitConversions);
-      return convertFn(weight);
-  }
+        R.identity,
+        [fromUnit, toUnit],
+        UnitConversions);
+    return convertFn(weight);
+}
 
-  const kgToLitres = (weight) => {
-      return (weight - 32) * 9/5;
-  }
+const kgToLitres = (weight) => {
+    return (weight * 0.033)
+}
 
-  const poundsToLitres = (weight) => {
-    return (weight - 32) * 9/5;
+const poundsToLitres = (weight) => {
+    const a =  (weight / 2.205);
+    return (a * 0.033)
 }
 
 const stoneToLitres = (weight) => {
-    return (weight - 32) * 9/5;
+    const a = (weight * 6.35);
+    return (a * 0.033)
 }
 
+const UnitConversions = {
+    KG: {
+        Litres: kgToLitres,
+    },
+    Stone: {
+        Litres: stoneToLitres,
+    },
+    Pounds: {
+        Litres: poundsToLitres,
+    }
+}
 
-
-  const UnitConversions = {
-      Litres: {
-          KG: kgToLitres,
-          Stone: stoneToLitres,
-          Pounds: poundsToLitres,
-      }
-  }
-
-  export default update;
+export default update;

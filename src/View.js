@@ -7,7 +7,7 @@ import {
   leftUnitMsg,
   rightUnitMsg,} from './Update'
 
-const { div, h1, pre, option, input, select,} = hh(h);
+const { div, h1, h2, pre, option, input, select,} = hh(h);
 
 const LEFT_UNITS = ['KG', 'Pounds', 'Stone',];
 const RIGHT_UNIT = ['Litres'];
@@ -27,7 +27,8 @@ const rightUnitOptions = (unitSelected) => {
 }
 
 const unitFields = (dispatch, unit, value, inputMsg, unitMsg) => {
-  return div({ className: 'w-50 ma1' }, [
+  console.log(value);
+  return div({ className: 'w-60 ma1' }, [
     input({
       type: 'text',
       className: 'db w-100 mv2 pa2 input-reset ba',
@@ -65,7 +66,8 @@ const rightUnitFields = (dispatch, unit, value, inputMsg, unitMsg) => {
 
 const view = (dispatch, model) => {
     return div({ className: 'mw6 center' }, [
-      h1({ className: 'f2 pv2 bb' }, 'Water'),
+      h1({ className: 'mt2 mb0 baskerville i fw1 f1 ma0'}, 'Enough Water?'),
+      h2({ className: "mt2 mb0 f6 fw4 ttu tracked" }, 'be like water my friend'),
       div({ className: 'flex'}, [
         unitFields(
           dispatch,
@@ -82,7 +84,7 @@ const view = (dispatch, model) => {
           rightUnitMsg,
         ),
       ]),
-      pre(JSON.stringify(model, null, 2)),
+      // pre(JSON.stringify(model, null, 2)),
     ]);
   }
   

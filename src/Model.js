@@ -3,7 +3,7 @@ const initModel = {
     leftUnit: 'KG',
     rightValue: 0,
     rightUnit: 'Litres',
-    scoreLeft: true,
+    sourceLeft: true,
 }
 
 export default initModel;
