@@ -1,13 +1,22 @@
 body {
-    background-color: lightblue;
-  }
-  
-  h1 {
-    color: navy;
-    margin-left: 20px;
-  }
+    background-image: url(images/mu.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
 
-  .ba {
+h1 {
+    color: darkblue;
+    margin-left: 5px;
+    display: inline;
+}
+
+h2 {
+    color: black;
+    margin-left: 5px;
+}
+
+.ba {
     border-style: solid;
     border-width: 1px;
 }
@@ -67,7 +76,8 @@ body {
     transition: color .15s ease-in;
 }
 
-.link:link, .link:visited {
+.link:link,
+.link:visited {
     transition: color .15s ease-in;
 }
 
@@ -190,7 +200,9 @@ body {
     margin-left: auto;
 }
 
-.bg-animate, .bg-animate:hover, .bg-animate:focus {
+.bg-animate,
+.bg-animate:hover,
+.bg-animate:focus {
     transition: background-color .15s ease-in-out;
 }
 
@@ -199,9 +211,7 @@ body {
         padding-left: 2rem;
         padding-right: 2rem;
     }
-
     .f5-l {
         font-size: 1rem;
     }
 }
-
