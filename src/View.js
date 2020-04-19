@@ -32,12 +32,12 @@ const unitFields = (dispatch, unit, value, inputMsg, unitMsg) => {
     return div({ className: 'w-60 ma1' }, [
         input({
             type: 'text',
-            className: 'db w-100 mv2 pa2 input-reset ba',
+            className: 'db w-100 mv2 pa1 input-reset ba',
             value,
             oninput: e => dispatch(inputMsg(e.target.value)),
         }),
         select({
-                className: 'db w-100 mv2 pa2 input-reset br bg-white ba b--black',
+                className: 'db w-100 mv2 pa1 input-reset br bg-white ba b--black',
                 onchange: e => dispatch(unitMsg(e.target.value))
             },
             unitOptions(unit),
@@ -46,15 +46,15 @@ const unitFields = (dispatch, unit, value, inputMsg, unitMsg) => {
 }
 
 const rightUnitFields = (dispatch, unit, value, inputMsg, unitMsg) => {
-    return div({ className: 'w-50 ma1' }, [
+    return div({ className: 'w-60 ma1' }, [
         input({
             type: 'text',
-            className: 'db w-100 mv2 pa2 input-reset ba',
+            className: 'db w-100 mv2 pa1 input-reset ba',
             value,
             oninput: e => dispatch(inputMsg(e.target.value)),
         }),
         select({
-                className: 'db w-100 mv2 pa2 input-reset br bg-white ba b--black',
+                className: 'db w-100 mv2 pa1 input-reset br bg-white ba b--black',
                 onchange: e => dispatch(unitMsg(e.target.value))
             },
             rightUnitOptions(unit),
@@ -64,9 +64,9 @@ const rightUnitFields = (dispatch, unit, value, inputMsg, unitMsg) => {
 
 
 const view = (dispatch, model) => {
-    return div({ className: 'mw6 center' }, [
-        h1({ className: 'fw3' }, 'How much water should I drink?'),
-        h2({ className: "mt2 mb0 f6 fw7 ttu trackefd" }, 'enter your weight below to find out'),
+    return div({ className: 'tc ph4 mw6 center' }, [
+        h1({ className: 'f3 f2-m f1-l fw2 black-90 mv3' }, 'How much water should I drink?'),
+        h2({ className: "f5 f4-m f3-l fw2 black-50 mt0 lh-copy" }, 'enter your weight below to find out'),
         div({ className: 'flex' }, [
             unitFields(
                 dispatch,
